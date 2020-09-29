@@ -4,26 +4,23 @@ import cgi
 print("content-type:text/html")
 print()
 
-y= cgi.FieldStorage()
-
+y=cgi.FieldStorage()
 z=y.getvalue("x")
-print("Command: {}" format(z))
-print()print()
-print("Output: ", end='')
+print("Input: {}".format(z))
+print()
 
 import subprocess
 
-if "time" in z:
-    x=subprocess.getoutput(timedatectl)
+if "day" in z:
+    p=subprocess.getoutput("date")
 
-elif "date" in z:
-    x=subprocess.getoutput(date)
+elif "time" in z:
+    p=subprocess.getoutput("timedatectl")
 
-elif (("cal" in z) or ("calander" in z)):
-    x=subprocess.getoutput(cal)
+elif "calender" in z:
+    p=subprocess.getoutput("cal")
 
+else:
+    p=subprocess.getoutput("Still learning !Command not found!")
 
-
-print(x)
-
-
+print("Output: {} ".format(p))
